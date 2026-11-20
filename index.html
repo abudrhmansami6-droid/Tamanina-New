@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#173d32">
+<meta name="description" content="طمأنينة — مساحة هادئة للذكر والتسبيح">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<title>طمأنينة | Tamanina</title>
+<style>
+:root{--green:#173d32;--green2:#285a46;--gold:#d7b56d;--cream:#fbf8ef;--ink:#20352c;--muted:#738078;--shadow:0 12px 34px #173d3215}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#f7f4e9,#edf3ec);color:var(--ink);font-family:Tahoma,Arial,sans-serif;min-height:100vh}
+header{background:linear-gradient(135deg,var(--green),#285a46);color:white;padding:24px 18px 30px;border-radius:0 0 28px 28px;box-shadow:var(--shadow)}
+.top{max-width:850px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:12px}.brand{font-size:25px;font-weight:bold}.sub{font-size:12px;color:#e6e0cf;margin-top:6px}.badge{border:1px solid #ffffff55;border-radius:20px;padding:7px 11px;font-size:12px}
+main{max-width:850px;margin:20px auto;padding:0 14px 35px}.welcome{background:#fff;border-radius:20px;padding:18px;box-shadow:var(--shadow)}.welcome h2{margin:0 0 8px;color:var(--green)}.welcome p{margin:0;color:var(--muted);line-height:1.8}
+nav{display:flex;gap:8px;overflow:auto;margin:14px 0}nav button{white-space:nowrap;background:#fff;color:var(--green);border:1px solid #e1e9e1}nav button.active{background:var(--green);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:15px}.card{background:#fff;border:1px solid #e9eee7;border-radius:20px;padding:17px;box-shadow:var(--shadow)}.card h3{margin:0 0 12px;color:var(--green)}.wide{grid-column:1/-1}
+button{font:inherit;border:0;border-radius:13px;padding:11px 15px;background:var(--green);color:#fff;cursor:pointer}button.secondary{background:#edf3ed;color:var(--green);border:1px solid #dce7dc}button.gold{background:var(--gold);color:#26372e}
+.row{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.counter{font-size:48px;font-weight:bold;text-align:center;color:var(--green);margin:8px 0}.muted{color:var(--muted);font-size:13px;line-height:1.7}.dhikr{font-size:21px;line-height:2;text-align:center;padding:12px 4px;color:#2c4939}.tree{font-size:31px;text-align:center;min-height:65px;line-height:1.6;overflow-wrap:anywhere}.stat{font-size:24px;font-weight:bold;color:var(--green)}.quote{background:#f8f5e9;border-right:4px solid var(--gold);padding:12px;border-radius:12px;line-height:1.8;margin-top:10px}
+input,select{padding:10px;border:1px solid #dce5dc;border-radius:11px;background:#fff;color:var(--ink);font:inherit;max-width:100%}label{font-size:13px;color:var(--muted);display:block;margin:8px 0 5px}.footer{text-align:center;color:var(--muted);font-size:12px;line-height:1.9;margin:22px 0 5px}
+.panel{display:none}.panel.active{display:block}
+@media(max-width:560px){.grid{grid-template-columns:1fr}.wide{grid-column:auto}.top{align-items:flex-start}.brand{font-size:22px}}
+</style>
+</head>
+<body>
+<header><div class="top"><div><div class="brand">🌿 طمأنينة</div><div class="sub">رفيقك اليومي للذكر والسكينة</div></div><span class="badge">TAMANINA</span></div></header>
+<main>
+<section class="welcome"><h2>أهلاً بك في طمأنينة</h2><p>اجعل لسانك رطباً بذكر الله، وخذ من يومك لحظات هادئة تملأ قلبك بالسكينة.</p></section>
+<nav>
+<button class="active" data-tab="home">الرئيسية</button><button data-tab="tasbeeh">التسبيح</button><button data-tab="adhkar">الأذكار</button><button data-tab="tree">شجرة الأجر</button><button data-tab="settings">الإعدادات</button>
+</nav>
+<section id="home" class="panel active">
+<div class="grid">
+<div class="card"><h3>حصيلة تسبيحك</h3><div class="stat" id="totalHome">0</div><div class="muted">تسبيحة محفوظة على جهازك</div></div>
+<div class="card"><h3>شجرة أجرك</h3><div class="stat" id="treesHome">🌱 0</div><div class="muted">كل تسبيحة تضيف شجرة صغيرة</div></div>
+<div class="card wide"><h3>رسالة اليوم</h3><div class="quote" id="dailyQuote"></div></div>
+<div class="card wide"><h3>ابدأ الآن</h3><div class="row"><button onclick="showTab('tasbeeh')">ابدأ التسبيح</button><button class="secondary" onclick="showTab('adhkar')">اقرأ الأذكار</button></div></div>
+</div></section>
+<section id="tasbeeh" class="panel"><div class="grid">
+<div class="card wide"><h3>عداد التسبيح</h3><div class="dhikr" id="currentDhikr">سبحان الله</div><div class="counter" id="count">0</div><div class="row" style="justify-content:center"><button class="gold" id="plus">سبّح</button><button class="secondary" id="reset">تصفير العداد</button></div><p class="muted" style="text-align:center">كل ضغطة تزيد العداد وتضيف شجرة إلى حصيلتك.</p></div>
+<div class="card wide"><h3>اختر الذكر</h3><div class="row"><button class="secondary choose" data-text="سبحان الله">سبحان الله</button><button class="secondary choose" data-text="الحمد لله">الحمد لله</button><button class="secondary choose" data-text="الله أكبر">الله أكبر</button><button class="secondary choose" data-text="أستغفر الله">أستغفر الله</button><button class="secondary choose" data-text="لا إله إلا الله">لا إله إلا الله</button></div></div>
+</div></section>
+<section id="adhkar" class="panel"><div class="grid">
+<div class="card wide"><h3>أذكار مختارة</h3><div class="quote">سُبْحَانَ اللهِ وَبِحَمْدِهِ، سُبْحَانَ اللهِ الْعَظِيمِ.</div><div class="quote">أَسْتَغْفِرُ اللهَ وَأَتُوبُ إِلَيْهِ.</div><div class="quote">لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ.</div><div class="quote">اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ.</div></div>
+</div></section>
+<section id="tree" class="panel"><div class="grid">
+<div class="card wide"><h3>شجرة الأجر 🌳</h3><p class="muted">تنمو غابتك الرمزية مع كل تسبيحة تسجلها.</p><div class="tree" id="treeVisual">🌱</div><div class="stat" style="text-align:center" id="treeCount">0 شجرة</div><div class="row" style="justify-content:center;margin-top:12px"><button class="secondary" id="clearAll">تصفير جميع الإحصائيات</button></div></div>
+</div></section>
+<section id="settings" class="panel"><div class="grid">
+<div class="card wide"><h3>الإعدادات والإشعارات</h3>
+<label><input type="checkbox" id="soundOn" checked> تفعيل صوت النقر</label>
+<label><input type="checkbox" id="notifyOn"> تفعيل التذكيرات بالإشعارات</label>
+<label>وقت التذكير اليومي</label><input type="time" id="notifyTime" value="09:00">
+<div class="row" style="margin-top:12px"><button id="saveSettings">حفظ الإعدادات</button><button class="secondary" id="testNotify">تجربة إشعار</button></div>
+<p class="muted">الإشعارات تحتاج إذنًا من المتصفح، وقد لا تعمل في الخلفية على بعض الهواتف إلا عند تثبيت التطبيق وإعداد دعم الإشعارات.</p>
+</div>
+<div class="card wide"><h3>حول التطبيق</h3><p class="muted">طمأنينة — برمجة وتطوير المهندس عبدالرحمن سامي<br>للتواصل: 771072866</p></div>
+</div></section>
+<div class="footer">اللهم اجعل هذا العمل خالصاً لوجهك الكريم<br>© طمأنينة Tamanina</div>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const defaults={total:0,count:0,dhikr:"سبحان الله",sound:true,notify:false,time:"09:00"};
+let data={...defaults};
+try{data={...defaults,...JSON.parse(localStorage.getItem("tamanina-data")||"{}")}}catch(e){}
+function save(){localStorage.setItem("tamanina-data",JSON.stringify(data));render()}
+function render(){
+$("totalHome").textContent=data.total;$("treesHome").textContent="🌳 "+data.total;
+$("count").textContent=data.count;$("currentDhikr").textContent=data.dhikr;
+$("treeCount").textContent=data.total+" شجرة";$("treeVisual").textContent=data.total?("🌳".repeat(Math.min(data.total,60))):"🌱";
+$("soundOn").checked=data.sound;$("notifyOn").checked=data.notify;$("notifyTime").value=data.time;
+}
+function showTab(id){document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("active",p.id===id));document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("active",b.dataset.tab===id));}
+document.querySelectorAll("nav button").forEach(b=>b.addEventListener("click",()=>showTab(b.dataset.tab)));
+function beep(){if(!data.sound)return;try{let c=new (window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=660;g.gain.value=.035;o.start();o.stop(c.currentTime+.07)}catch(e){}}
+$("plus").onclick=()=>{data.count++;data.total++;beep();save()};
+$("reset").onclick=()=>{data.count=0;save()};
+document.querySelectorAll(".choose").forEach(b=>b.onclick=()=>{data.dhikr=b.dataset.text;save()});
+$("clearAll").onclick=()=>{if(confirm("هل تريد تصفير جميع الأعداد؟")){data.count=0;data.total=0;save()}};
+$("saveSettings").onclick=async()=>{
+data.sound=$("soundOn").checked;data.notify=$("notifyOn").checked;data.time=$("notifyTime").value;
+if(data.notify && "Notification" in window && Notification.permission==="default"){try{await Notification.requestPermission()}catch(e){}}
+if(data.notify && "Notification" in window && Notification.permission!=="granted"){alert("لم يتم منح إذن الإشعارات. يمكنك تفعيله من إعدادات المتصفح.");}
+save();alert("تم حفظ الإعدادات");
+};
+function sendNotification(){
+if(!("Notification" in window)){alert("هذا المتصفح لا يدعم إشعارات الويب.");return}
+if(Notification.permission==="granted"){let msgs=["لا تنسَ ذكر الله، ففي ذكره طمأنينة للقلب 🌿","سبّح الله واملأ وقتك نوراً 🤍","استغفر الله؛ لعلها تكون سبباً للفرج 🌸","صلّ على النبي ﷺ"];new Notification("طمأنينة 🌿",{body:msgs[Math.floor(Math.random()*msgs.length)],icon:"icon.svg"})}
+else Notification.requestPermission().then(p=>{if(p==="granted")sendNotification();else alert("اسمح بالإشعارات من إعدادات المتصفح.")});
+}
+$("testNotify").onclick=sendNotification;
+$("dailyQuote").textContent=["ألا بذكر الله تطمئن القلوب.","سبحان الله وبحمده، سبحان الله العظيم.","اجعل لك في يومك نصيباً من الاستغفار.","اللهم اشرح صدورنا بذكرك."][new Date().getDate()%4];
+if("serviceWorker" in navigator && location.protocol.startsWith("http"))navigator.serviceWorker.register("./sw.js").catch(()=>{});
+render();
+</script>
+</body></html>
